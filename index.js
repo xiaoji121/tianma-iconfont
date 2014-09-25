@@ -10,9 +10,9 @@ module.exports = function () {
 
     return function(req, res) {
         req(function (err) {
-            var baseName = Path.basename(req.path);
+            var extName = Path.extname(req.path);
             var pattern = /\.(eot|ttf|woff|svg)/i;
-            if (pattern.test(baseName)) {
+            if (pattern.test(extName)) {
                 res.head('Access-Control-Allow-Origin', '*');
                 res.type('application/octet-stream')
             }
