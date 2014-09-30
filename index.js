@@ -9,15 +9,15 @@ var Path = require('path');
 module.exports = function () {
 
     return function(req, res) {
-        req(function (err) {
-            var extName = Path.extname(req.path);
-            var pattern = /\.(eot|ttf|woff|svg)/i;
-            if (pattern.test(extName)) {
-                res.head('Access-Control-Allow-Origin', '*');
-                res.type('application/octet-stream')
-            }
-            res(err);
-        });
+        var extName = Path.extname(req.path);
+        var pattern = /\.(eot|ttf|woff|svg)/i;
+
+        if (pattern.test(extName)) {
+            res.head('Access-Control-Allow-Origin', '*');
+            res.type('application/octet-stream')
+        }
+
+        req(res);
     }
 
 };
